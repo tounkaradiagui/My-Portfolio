@@ -2,8 +2,24 @@ import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
 
 const TechIcons = ({model}) => {
+
+    const loader = new GLTFLoader();
+
+  loader.load(
+    "/models/react_logo-transformed.glb",
+    (gltf) => {
+      scene.add(gltf.scene);
+    },
+    undefined,
+    (error) => {
+      console.error("GLB Load Error:", error);
+    }
+  );
+    
     const scene = useGLTF(model.modelPath);
 
     useEffect(() => {
